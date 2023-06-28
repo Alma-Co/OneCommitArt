@@ -1,4 +1,5 @@
-let y = 150;
+let speed = 2;
+let x, y = 150;
 const totalTriangles = y*2;
 
 
@@ -10,9 +11,9 @@ function setup() {
 
 function draw() {
   background(0);
-  y = y - 1;
-  if (y < -totalTriangles) {
-    y = height;
+  y = y - speed;
+  if (y < -totalTriangles ||y > totalTriangles) {
+    speed *= -1;
   }
 
   for (let i = 0; i < totalTriangles; i +=5) {
