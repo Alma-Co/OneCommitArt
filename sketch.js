@@ -4,7 +4,7 @@ const totalTriangles = y*2;
 
 
 function setup() {
-  createCanvas(720, 400);
+  createCanvas(720, 700);
   stroke(4, 55, 242);
   frameRate(50);
 }
@@ -12,7 +12,7 @@ function setup() {
 function draw() {
   background(0);
   y = y - speed;
-  if (y < -totalTriangles ||y > totalTriangles) {
+  if (y + 80 < -totalTriangles ||y + totalTriangles > width) {
     speed *= -1;
   }
 
