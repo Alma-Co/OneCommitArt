@@ -27,14 +27,20 @@ function draw() {
   }
 }
 
+const DARK_MAGENTA= [302, 90, 56];
+const PERSIAN_BLUE = [233, 75, 69];
+const SAPPHIRE = [223, 70, 66];
+const BLUE_MUNSELL = [190, 59, 59];
+const MINT = [151, 60, 73];
+const SCREAMIN_GREEN = [131, 64, 93];
+
 function fillEvenTriangle(item) {
   let black = color(0);
   if(item === totalTriangles - 5){
     fill(black);
   }
   else if(item === totalTriangles % 2 == 0){
-    let h = random(0, 242);
-    fill(4, 55, h);
+    fill(color(random(DARK_MAGENTA), random(PERSIAN_BLUE), random(SAPPHIRE), random(BLUE_MUNSELL), random(MINT), random(SCREAMIN_GREEN)));
   }
   else {
     fill(black);
