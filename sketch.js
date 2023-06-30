@@ -1,29 +1,35 @@
 let speed = 2;
-let x, y = 150;
-const totalTriangles = y*2;
+let x, y;
+const totalTriangles = 300;
+const splitFactor = 10;
 
 
 function setup() {
   createCanvas(720, 700);
   stroke(4, 55, 242);
   frameRate(50);
+  x = y = 420;
 }
 
 function draw() {
   background(0);
   y = y - speed;
-  if (y + 80 < -totalTriangles ||y + totalTriangles > width) {
+  if (y + 80 < -totalTriangles || y + totalTriangles > width) {
     speed *= -1;
   }
 
+  const yPercentage = -1 * ((y - (width - totalTriangles)) / (width + 80));
+
+  console.log(y ,yPercentage);
+
   for (let i = 0; i < totalTriangles; i +=5) {
-    fillEvenTriangle(i)
-    triangle(y + i, y + i, y + i, 60, 60, 60 + y + i);
+    fillEvenTriangle(i);
+    triangle(y + i * (splitFactor * yPercentage), y + i * (splitFactor * yPercentage), y + i * (splitFactor * yPercentage), 60, 60, 60 + y + i * (splitFactor * yPercentage));
   }
 
   for (let i = 0; i < totalTriangles; i +=5) {
-    fillEvenTriangle(i)
-    triangle(30 + i, y + i, y + i, 80, 80, 80 + y + i);
+    fillEvenTriangle(i);
+    triangle(30 + i * (splitFactor * yPercentage), y + i * (splitFactor * yPercentage), y + i * (splitFactor * yPercentage), 80, 80, 80 + y + i * (splitFactor * yPercentage));
   }
 }
 
