@@ -28,9 +28,10 @@ function draw() {
   }
 
   for (let i = 0; i < totalTriangles; i +=5) {
-    fillEvenTriangle(i);
     triangle(30 + i * (splitFactor * yPercentage), y + i * (splitFactor * yPercentage), y + i * (splitFactor * yPercentage), 80, 80, 80 + y + i * (splitFactor * yPercentage));
   }
+
+  
 }
 
 const DARK_MAGENTA= [302, 90, 56];
