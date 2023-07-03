@@ -1,0 +1,18 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+canvas {
+display: block;
+border: 1px solid #0437f2;
+}
+
+body {
+display: flex;
+align-content: center;
+justify-content: center;
+flex-wrap: wrap;
+background-color: #000000;
+}

@@ -5,7 +5,7 @@ const splitFactor = 10;
 const extenstionFactor = 7;
 
 function setup() {
-  createCanvas(720, 700);
+  createCanvas(720, windowHeight);
   stroke(4, 55, 242);
   frameRate(50);
   x = y = 420;
@@ -20,7 +20,6 @@ function draw() {
 
   const yPercentage = -1 * ((y - (width - totalTriangles)) / (width + 80));
 
-  console.log(y ,yPercentage);
 
   for (let i = 0; i < totalTriangles; i +=5) {
     fillEvenTriangle(i);
