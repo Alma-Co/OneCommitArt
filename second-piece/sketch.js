@@ -14,11 +14,11 @@ function draw() {
 
   beginShape();
   for (let i = 0; i < numberOfPoints; i++) {
-    const angle = map(i, 0, numberOfPoints, 0, 2*PI);
+    const angle = map(i, random(20), numberOfPoints, 0, 2*PI);
 
     const y = sin(angle * waveCycles);
 
-    vertex(i, (y * waveAmplitude) + (height / 2));
+    vertex(i, (y * waveAmplitude) + (height / 2) + random(10));
   }
   endShape();
 }
