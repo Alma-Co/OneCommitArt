@@ -3,6 +3,8 @@ const waves = 5;
 const waveCycles = 4;
 const waveAmplitude = 50;
 let white, pink;
+const speed = 0.01;
+let offset = 0;
 
 
 function setup() {
@@ -21,20 +23,28 @@ function draw() {
   const step = (height / waves);
   
   for (let i = 0; i < waves; i++) {
+    fill(255, 255, 0);
     beginShape();
- 
     for (let j = 0; j < numberOfPoints; j++) {
-      fill(255, 255, 0);
       const angle = map(j, random(20), numberOfPoints, 0, 2*PI);
       const y = sin(angle * waveCycles);
       vertex(j, (y * waveAmplitude) + (i * step) + waveAmplitude + random(10));
     }
+
+    //moving wave
     for (let j = 0; j < numberOfPoints; j++) {
-      const angle = map(j, random(5), numberOfPoints, 8, 2*PI);
+      const angle = map(j, random(5), numberOfPoints, 8, 2*PI) + offset;
       const y = sin(angle * waveCycles);
       vertex(j, (y * waveAmplitude) + (i * step) + waveAmplitude + random(5));
     }
     endShape();
+  }
+
+  offset += speed;
+
+  // Reset to zero to avoid overflow of the variable
+  if (offset >= HALF_PI) {
+    offset = 0;
   }
 }
 
