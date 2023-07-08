@@ -54,7 +54,7 @@ function createBackground() {
   beginShape();
   stroke(255);
   strokeWeight(150);
-  setGradient(0, 0, width, height, white, pink); // invertir pink y white y mirar el resultado
+  setGradient(0, 0, width, height, pink, white); // invertir pink y white y mirar el resultado
   ellipse(width/2, height/2, width, height); 
   createLines();
   endShape()
