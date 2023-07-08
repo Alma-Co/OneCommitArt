@@ -15,10 +15,9 @@ function setup() {
 }
 
 function draw() {
-  // background(250, 217, 250);
-  setGradient(0, 0, width, height, pink, white);
-
+  createBackground();
   stroke(0);
+  strokeWeight(1);
 
   const step = (height / waves);
   
@@ -45,6 +44,27 @@ function draw() {
   // Reset to zero to avoid overflow of the variable
   if (offset >= HALF_PI) {
     offset = 0;
+  }
+  endShape();
+
+  
+}
+
+function createBackground() {
+  beginShape();
+  stroke(255);
+  strokeWeight(150);
+  setGradient(0, 0, width, height, white, pink); // invertir pink y white y mirar el resultado
+  ellipse(width/2, height/2, width, height); 
+  createLines();
+  endShape()
+}
+
+function createLines() {
+  stroke(255);
+  for (let i = 120; i < height; i += 40) {
+    strokeWeight(5 + i/20);
+    line(0, i, width, i)
   }
 }
 
