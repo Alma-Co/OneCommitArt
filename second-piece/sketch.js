@@ -3,7 +3,7 @@ const waves = 5;
 const waveCycles = 4;
 const waveAmplitude = 50;
 let white, pink;
-const speed = 0.01;
+const speed = 0.03;
 let offset = 0;
 
 
@@ -16,48 +16,59 @@ function setup() {
 
 function draw() {
   createBackground();
+
+  drawPyramid(80);
+
   stroke(0);
   strokeWeight(1);
 
   const step = (height / waves);
   
-  for (let i = 0; i < waves; i++) {
-    fill(255, 255, 0);
-    beginShape();
-    for (let j = 0; j < numberOfPoints; j++) {
-      const angle = map(j, random(20), numberOfPoints, 0, 2*PI);
-      const y = sin(angle * waveCycles);
-      vertex(j, (y * waveAmplitude) + (i * step) + waveAmplitude + random(10));
-    }
+  fill(255, 255, 0);
 
-    //moving wave
-    for (let j = 0; j < numberOfPoints; j++) {
-      const angle = map(j, random(5), numberOfPoints, 8, 2*PI) + offset;
-      const y = sin(angle * waveCycles);
-      vertex(j, (y * waveAmplitude) + (i * step) + waveAmplitude + random(5));
-    }
-    endShape();
+  for (let i = 0; i < waves; i++) {
+    drawWave(numberOfPoints, waveCycles, waveAmplitude, 20, 10, i * step, 0, true, false);
+    drawWave(numberOfPoints, 1, waveAmplitude, 5, 5, i * step, offset, false, true);
   }
 
   offset += speed;
 
   // Reset to zero to avoid overflow of the variable
-  if (offset >= HALF_PI) {
+  if (offset >= TWO_PI) {
     offset = 0;
   }
-  endShape();
+}
 
-  
+function drawWave(numberOfPoints, cycles, amplitude, angleDistorsion, amplitudeDistorsion, heightOffset, movingOffset, startShape = true, closeShape = true) {
+  if (startShape) {
+    beginShape();
+  }
+
+  for (let j = 0; j < numberOfPoints; j++) {
+    const angle = map(j, random(angleDistorsion), numberOfPoints, TWO_PI, 0) + movingOffset;
+    const y = sin(angle * cycles);
+    vertex(j, (y * amplitude) + heightOffset + amplitude + random(amplitudeDistorsion));
+  }
+
+  if (closeShape) {
+    endShape();
+  }
+}
+
+function drawPyramid(extensionFactor = 0) {
+  stroke(255);
+  strokeWeight(10);
+
+  line(-extensionFactor, height, width/2, 0);
+  line(width + extensionFactor, height, width/2, 0);
 }
 
 function createBackground() {
-  beginShape();
   stroke(255);
   strokeWeight(150);
-  setGradient(0, 0, width, height, pink, white); // invertir pink y white y mirar el resultado
+  setGradient(0, 0, width, height, white, pink); // invertir pink y white y mirar el resultado
   ellipse(width/2, height/2, width, height); 
   createLines();
-  endShape()
 }
 
 function createLines() {
