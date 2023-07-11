@@ -37,8 +37,28 @@ function draw() {
   if (offset >= TWO_PI) {
     offset = 0;
   }
+
+  createFrame()
 }
 
+function createFrame() {
+  beginShape()
+  noFill()
+  for (let i = 0; i < width/10; i += 5) {
+    // strokeWeight(8);
+    // stroke(188, 64, 50 + i*4);
+    if(i % 2 == 0) {
+      strokeWeight(9);
+      stroke(188, 64, 50 + i*5);
+    } else {
+      strokeWeight(3);
+      stroke(0);
+    }
+    rect(0 + i , 0 + i, width - i*2, height -i*2, 20)
+  }
+    
+  endShape()
+}
 function drawWave(numberOfPoints, cycles, amplitude, angleDistorsion, amplitudeDistorsion, heightOffset, movingOffset, startShape = true, closeShape = true) {
   if (startShape) {
     beginShape();
@@ -74,7 +94,7 @@ function createBackground() {
 function createLines() {
   stroke(255);
   for (let i = 120; i < height; i += 40) {
-    strokeWeight(5 + i/20);
+    strokeWeight(5 + i/30);
     line(0, i, width, i)
   }
 }
