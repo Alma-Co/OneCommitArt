@@ -28,7 +28,7 @@ function draw() {
 
   for (let i = 0; i < waves; i++) {
     drawWave(numberOfPoints, waveCycles, waveAmplitude, 20, 10, i * step, 0, true, false);
-    drawWave(numberOfPoints, 1, waveAmplitude, 5, 5, i * step, offset, false, true);
+    drawWave(numberOfPoints, 1, waveAmplitude, 5, 5, i * step, offset + (i * .5), false, true);
   }
 
   offset += speed;
