@@ -2,7 +2,7 @@ let numberOfPoints;
 const waves = 5;
 const waveCycles = 4;
 const waveAmplitude = 50;
-let white, pink;
+let lighterPink, pink;
 const speed = 0.03;
 let offset = 0;
 
@@ -10,7 +10,7 @@ let offset = 0;
 function setup() {
   createCanvas(700, windowHeight);
   numberOfPoints = width;
-  white = color(255);
+  lighterPink = color(233, 128, 10);
   pink = color(233, 128, 233);
 }
 
@@ -84,17 +84,17 @@ function drawPyramid(extensionFactor = 0) {
 }
 
 function createBackground() {
-  stroke(255);
+  stroke(0);
   strokeWeight(150);
-  setGradient(0, 0, width, height, white, pink); // invertir pink y white y mirar el resultado
+  setGradient(0, 0, width, height, lighterPink, pink);
   ellipse(width/2, height/2, width, height); 
   createLines();
 }
 
 function createLines() {
-  stroke(255);
-  for (let i = 120; i < height; i += 40) {
-    strokeWeight(5 + i/30);
+  stroke(0);
+  for (let i = 250; i < height; i += 20) {
+    strokeWeight(3 + i/40);
     line(0, i, width, i)
   }
 }
