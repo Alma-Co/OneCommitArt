@@ -26,9 +26,9 @@ function draw() {
   
   fill(255, 255, 0);
 
-  for (let i = 0; i < waves; i++) {
-    drawWave(numberOfPoints, waveCycles, waveAmplitude, 20, 10, i * step, 0, true, false);
-    drawWave(numberOfPoints, 1, waveAmplitude, 5, 5, i * step, offset + (i * .5), false, true);
+  for (let i = 0; i < waves - 1; i++) {
+    drawWave(numberOfPoints, waveCycles, waveAmplitude, 20, 10, (i * step) + step / 1.5, 0, true, false);
+    drawWave(numberOfPoints, 1, waveAmplitude, 5, 5, (i * step) + step / 1.5, offset + (i * .5), false, true);
   }
 
   offset += speed;
@@ -64,8 +64,8 @@ function drawWave(numberOfPoints, cycles, amplitude, angleDistorsion, amplitudeD
     beginShape();
   }
 
-  for (let j = 0; j < numberOfPoints; j++) {
-    const angle = map(j, random(angleDistorsion), numberOfPoints, TWO_PI, 0) + movingOffset;
+  for (let j = width/10 - 10; j < numberOfPoints - width / 10 + 10; j++) {
+    const angle = map(j - (width/10 - 10), random(angleDistorsion), numberOfPoints - width / 10 + 10, TWO_PI, 0) + movingOffset;
     const y = sin(angle * cycles);
     vertex(j, (y * amplitude) + heightOffset + amplitude + random(amplitudeDistorsion));
   }
@@ -79,8 +79,8 @@ function drawPyramid(extensionFactor = 0) {
   stroke(255);
   strokeWeight(10);
 
-  line(-extensionFactor, height, width/2, 0);
-  line(width + extensionFactor, height, width/2, 0);
+  line(-extensionFactor, height, width/2, width / 10);
+  line(width + extensionFactor, height, width/2, width / 10);
 }
 
 function createBackground() {
