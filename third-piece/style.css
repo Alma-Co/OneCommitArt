@@ -1,0 +1,13 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+display: flex;
+align-content: center;
+justify-content: center;
+flex-wrap: wrap;
+background-color: #000000;
+}
