@@ -4,8 +4,14 @@ class Division {
     this.middle = middle;
   }
 }
+var radius = 350;
+var angle = 0;
+var speed = 0.05;
+var centerX = 350;
+var centerY = 350;
 
 function setup() {
+  
   createCanvas(700, windowHeight);
   
   background(17, 53, 53);
@@ -15,6 +21,7 @@ function setup() {
     
   drawingContext.filter = 'blur(2.5px)';
   drawRosette();
+
 }
 
 
@@ -22,19 +29,37 @@ function easeInSine(x) {
   return x * x;
 }
 
-function draw() { }
+
+function draw() { 
+  createEllipsis();
+}
+
+function createEllipsis() {
+ 
+  stroke(83, 252, 247);
+  
+  var x = centerX + radius * cos(angle);
+	var y = centerY + radius * sin(angle);
+  ellipse(x, y, 5, 5);
+  if (angle < 8) {
+    angle = angle + speed;
+  }
+  
+}
 
 function drawRosette() {
   translate(width / 2, height / 2);
 
   ellipseMode(CENTER);
   noFill();
-  strokeWeight(3);
+  stroke(255)
+  strokeWeight(4);
 
   // Smallest circle
   circle(0, 0, 35);
 
   // Arcs around the smallest circle
+  
   arc(0, -25, 35, 35, radians(140), radians(40), OPEN);
   arc(-25, 0, 35, 35, radians(50), radians(305), OPEN);
   arc(0, 25, 35, 35, radians(315), radians(215), OPEN);
@@ -44,6 +69,7 @@ function drawRosette() {
   circle(0, 0, 85);
 
   // Outer circle
+ 
   circle(0, 0, width);
 
   const radius = width / 2;
@@ -62,8 +88,8 @@ function drawRosette() {
   // First division is the whole circle
   const divisions = [new Division(0, degrees(TWO_PI), 0)];
 
-  strokeWeight(2);
-  stroke(0);
+  strokeWeight(4);
+  stroke(255);
 
   // While there are subdivisions to proces
   while(divisions.length) {
@@ -161,8 +187,6 @@ function drawRosette() {
 }
 
 function createRectangles() {
-  strokeWeight(1);
-
   const cols = 22;
   const rows = 23;
 
