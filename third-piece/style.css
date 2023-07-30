@@ -11,3 +11,7 @@ body {
   flex-wrap: wrap;
   background-color: #fff;
 }
+
+div#sketch-foreground {
+  position: absolute;
+}
