@@ -37,7 +37,7 @@ const backgroundSketch = (sketch) => {
   
     sketch.ellipseMode(sketch.CENTER);
     sketch.noFill();
-    sketch.stroke(255)
+    sketch.stroke(233, 78, 104)
     sketch.strokeWeight(4);
   
     // Smallest circle
@@ -176,10 +176,10 @@ const backgroundSketch = (sketch) => {
   
     sketch.background(17, 53, 53);
   
-    sketch.drawingContext.filter = 'blur(4px)';
+    sketch.drawingContext.filter = 'blur(6px)';
     createRectangles(sketch);
       
-    sketch.drawingContext.filter = 'blur(2.5px)';
+    sketch.drawingContext.filter = 'blur(1.5px)';
     drawRosette(sketch);
   };
 
@@ -226,7 +226,7 @@ const foregroundSketch = (sketch) => {
   sketch.draw = () => {
     sketch.translate(sketch.width / 2, sketch.height / 2);
     sketch.rotate(-sketch.HALF_PI);
-    sketch.background(0, 0, 0, 0.8);
+    sketch.background(0, 0, 0, 0.3);
     calculatePoints(sketch);
     drawEllipsis(sketch);
   };
