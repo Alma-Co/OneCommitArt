@@ -38,7 +38,9 @@ const backgroundSketch = (sketch) => {
 
     sketch.ellipseMode(sketch.CENTER);
     sketch.noFill();
+    
     sketch.stroke(233, 78, 104)
+
     sketch.strokeWeight(4);
 
     // Smallest circle
@@ -56,7 +58,7 @@ const backgroundSketch = (sketch) => {
 
     // Outer circle
 
-    sketch.circle(0, 0, sketch.width);
+    sketch.circle(0, 0, sketch.width - 200);
 
     const radius = sketch.width / 2;
 
@@ -65,7 +67,7 @@ const backgroundSketch = (sketch) => {
 
     const maxSubdivisions = Math.floor((360 / minAngle) / 2);
     // The greater the step, the faster the triangles will grow
-    const heightStep = 29;
+    const heightStep = 20;
     const maxHeight = maxSubdivisions * heightStep;
 
     // How far from the center the triangles will start
@@ -183,8 +185,18 @@ const backgroundSketch = (sketch) => {
     sketch.arc(x, y, 50, 50, sketch.TWO_PI - sketch.HALF_PI, sketch.TWO_PI);
     sketch.arc(x + 50, y, 50, 50, sketch.PI, sketch.TWO_PI - sketch.HALF_PI);
 
+    sketch.stroke(255);
     sketch.strokeWeight(2);
     sketch.line(x + 25, y + 10, x + 25, y - 30);
+
+    sketch.stroke(183, 192, 277);
+    sketch.strokeWeight(3);
+    sketch.arc(x + 30, y - 50, 30, 50, sketch.HALF_PI, sketch.PI);
+    sketch.arc(x + 20, y - 50, 30, 50, 0, sketch.HALF_PI);
+    sketch.arc(x, y - 30, 50, 50, sketch.TWO_PI - sketch.QUARTER_PI, 0);
+    sketch.arc(x + 50, y - 30, 50, 50, sketch.PI, sketch.PI + sketch.QUARTER_PI);
+
+  
   }
 
 
@@ -193,17 +205,16 @@ const backgroundSketch = (sketch) => {
 
     sketch.background(17, 53, 53);
 
-    sketch.drawingContext.filter = 'blur(6px)';
+    sketch.drawingContext.filter = 'blur(10px)';
     createRectangles(sketch);
 
     sketch.drawingContext.filter = 'blur(1.5px)';
     drawRosette(sketch);
 
-    drawFlower(sketch, 25, 50);
-    drawFlower(sketch, sketch.width - 75, 50);
-
-    drawFlower(sketch, 25, sketch.height - 40);
-    drawFlower(sketch, sketch.width - 75, sketch.height - 40);
+    for (let i = 0; i < sketch.width - 40; i += 25) {
+      drawFlower(sketch, i, 50);
+      drawFlower(sketch, i, sketch.height - 10);
+    }
   };
 
   sketch.draw = () => {};
@@ -223,7 +234,7 @@ const foregroundSketch = (sketch) => {
       const x = point.x;
       const y = point.y;
 
-      sketch.ellipse(x, y, 8, 8);
+      sketch.ellipse(x /1.2 , y / 1.2, 6, 6);
     }
   }
 
@@ -249,7 +260,7 @@ const foregroundSketch = (sketch) => {
   sketch.draw = () => {
     sketch.translate(sketch.width / 2, sketch.height / 2);
     sketch.rotate(-sketch.HALF_PI);
-    sketch.background(0, 0, 0, 0.3);
+    sketch.background(0, 0, 0, 0.5);
     calculatePoints(sketch);
     drawEllipsis(sketch);
   };
