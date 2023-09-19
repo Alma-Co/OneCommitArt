@@ -18,6 +18,20 @@ function draw() {
 
   line(width / 2, 0, width / 2, height);
 
+  drawBranch(width / 2, 0, 0, height);
+
+  fill(237, 34, 93);
+  drawDiamond(width/5, height/5);
+  fill(0, 0, 255);
+  drawDiamond(width/5, height/2);
+  fill(230, 230, 0);
+  drawDiamond(width/5, height - 150);
+
+ 
+  noise(width / 2, )
+}
+
+function drawBranch(x, y, angle, length) {
   for (let y = branchStep * 2; y < height - branchStep; y += branchStep) {
     const offsetY = y + map(noise(y), 0, 1, -1, 1) * branchOffset;
 
@@ -37,6 +51,14 @@ function draw() {
 
     line(centerX, centerY, x2, y2);
   }
+}
 
-  noise(width / 2, )
+function drawDiamond(x, y) {
+  stroke(0);
+  beginShape();
+  vertex(x, y + 30);
+  vertex(x + 30, y);
+  vertex(x, y - 30);
+  vertex(x - 30, y);
+  endShape(CLOSE);
 }
