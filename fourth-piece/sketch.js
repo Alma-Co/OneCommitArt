@@ -3,6 +3,8 @@ let branchStep = 0;
 let branchOffset = 0;
 const branchAngle = 50;
 const branchLength = 60;
+let colorOffset = 0;
+let colorOffsetDirection = 1;
 
 function setup() {
   createCanvas(700, windowHeight);
@@ -20,15 +22,28 @@ function draw() {
 
   drawBranch(width / 2, 0, 0, height);
 
-  fill(237, 34, 93);
+  colorMode(HSL);
+
+  let color = 240 + colorOffset;
+  color = color + map(noise(color), 0, 1, -1, 1) * 5;
+  fill(color, 85, 53);
   drawDiamond(width/5, height/5);
-  fill(0, 0, 255);
+
+  color = 120 + colorOffset;
+  color = color + map(noise(color), 0, 1, -1, 1) * 5;
+  fill(120 + colorOffset, 100, 50);
   drawDiamond(width/5, height/2);
-  fill(230, 230, 0);
+
+  color = colorOffset;
+  color = color + map(noise(color), 0, 1, -1, 1) * 5;
+  fill(colorOffset, 100, 60);
   drawDiamond(width/5, height - 150);
 
- 
-  noise(width / 2, )
+  colorOffset += colorOffsetDirection;
+
+  if (colorOffset >= 120 ||colorOffset <= 0) {
+    colorOffsetDirection *= -1;
+  }
 }
 
 function drawBranch(x, y, angle, length) {
