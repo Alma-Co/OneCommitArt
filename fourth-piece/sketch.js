@@ -7,7 +7,7 @@ let colorOffset = 0;
 let colorOffsetDirection = 1;
 
 function setup() {
-  createCanvas(700, windowHeight);
+  createCanvas(1000, windowHeight);
   branchStep = height / branchNumber;
   branchOffset = branchStep / 2;
 
@@ -15,7 +15,8 @@ function setup() {
 }
 
 function draw() {
-  stroke(0);
+  stroke(250);
+  background(0);
   strokeWeight(2);
 
   line(width / 2, 0, width / 2, height);
@@ -44,6 +45,8 @@ function draw() {
   if (colorOffset >= 120 ||colorOffset <= 0) {
     colorOffsetDirection *= -1;
   }
+
+  drawBlackAndWhiteStripes();
 }
 
 function drawBranch(x, y, angle, length) {
@@ -76,4 +79,19 @@ function drawDiamond(x, y) {
   vertex(x, y - 30);
   vertex(x - 30, y);
   endShape(CLOSE);
+}
+
+function drawBlackAndWhiteStripes() {
+  stroke(250);
+  strokeWeight(40);
+
+  const startPointX = width / 1.3; 
+
+  for (let y = 0; y < height + 40; y += 60) {
+    line(startPointX, y, width, y - 50);
+  }
+
+  stroke(0);
+  strokeWeight(40);
+  line(width / 1.33, 0, width / 1.33, height)
 }
