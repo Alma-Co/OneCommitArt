@@ -6,17 +6,22 @@ const branchLength = 60;
 let colorOffset = 0;
 let colorOffsetDirection = 1;
 
+let BG_COLOR = 0;
+let STROKE_COLOR = 250;
+
 function setup() {
   createCanvas(1000, windowHeight);
   branchStep = height / branchNumber;
   branchOffset = branchStep / 2;
 
   angleMode(DEGREES);
+
+  setTimeout(() => { thunder(); }, random(1000, 5000));
 }
 
 function draw() {
-  stroke(250);
-  background(0);
+  stroke(STROKE_COLOR);
+  background(BG_COLOR);
   strokeWeight(2);
 
   line(width / 2, 0, width / 2, height);
@@ -82,7 +87,7 @@ function drawDiamond(x, y) {
 }
 
 function drawBlackAndWhiteStripes() {
-  stroke(250);
+  stroke(STROKE_COLOR);
   strokeWeight(40);
 
   const startPointX = width / 1.3; 
@@ -91,7 +96,36 @@ function drawBlackAndWhiteStripes() {
     line(startPointX, y, width, y - 50);
   }
 
-  stroke(0);
+  stroke(BG_COLOR);
   strokeWeight(40);
   line(width / 1.33, 0, width / 1.33, height)
+}
+
+function invertColors() {
+  const aux = BG_COLOR;
+  BG_COLOR = STROKE_COLOR;
+  STROKE_COLOR = aux;
+}
+
+function thunder() {
+  const thunderNum = random(1, 5);
+  const noiseX = random(1000);
+  const noiseLambda = 100;
+
+  let totalTime = 0;
+
+  for (let i = 0; i < thunderNum; i++) {
+    const thunderSpacing = 150 + noise(noiseX + i * noiseLambda) * 150;
+    const thunderDuration = 80 + noise(noiseX + i * noiseLambda) * 120;
+
+    setTimeout(invertColors, i * thunderSpacing);
+    setTimeout(invertColors, i * thunderSpacing + thunderDuration);
+
+    // We just need the last, that's why we use = instead of +=
+    totalTime = i * thunderSpacing + thunderDuration;
+  }
+
+  const nextThunder = 1000 + noise(noiseX + thunderNum * noiseLambda) * 4000;
+
+  setTimeout(thunder, totalTime + nextThunder);
 }
