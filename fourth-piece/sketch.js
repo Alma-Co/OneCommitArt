@@ -8,16 +8,29 @@ let colorOffsetDirection = 1;
 
 let BG_COLOR = 0;
 let STROKE_COLOR = 250;
+let pointOnX;
+let fontsize = 80;
 
 function setup() {
   createCanvas(1000, windowHeight);
   branchStep = height / branchNumber;
   branchOffset = branchStep / 2;
+  pointOnX = width/5;
+  textSize(fontsize);
 
   angleMode(DEGREES);
 
   setTimeout(() => { thunder(); }, random(1000, 5000));
 }
+
+function coloredLetters(textPos) {
+  if(pointOnX > textPos && pointOnX < textPos + 40){
+    fill('red')
+    } else {
+      fill(0)
+    }
+}
+
 
 function draw() {
   stroke(STROKE_COLOR);
@@ -30,26 +43,33 @@ function draw() {
 
   colorMode(HSL);
 
-  let color = 240 + colorOffset;
-  color = color + map(noise(color), 0, 1, -1, 1) * 5;
-  fill(color, 85, 53);
-  drawDiamond(width/5, height/5);
+  textAlign(LEFT);
+  const posY = height -50;
+  
+  let positionX = 20;
+  ['S', 'c', 'a', 'n'].forEach((letter, index) => {
+    positionX += 45;
+    const y = 80;
+    coloredLetters(positionX);
+    text(letter, positionX, y);
+  });
+  let positionX2 = 20;
+  ['y', 'o', 'u', 'r'].forEach((letter, index) => {
+    positionX2 += 40;
+    const y = height - 50;
+    coloredLetters(positionX2);
+    text(letter, positionX2, y);
+  });
+  let positionX3 = 220;
+  ['l', 'i', 'f', 'e'].forEach((letter, index) => {
+    positionX3 += 18;
+    const y = height - 50;
+    coloredLetters(positionX3);
+    text(letter, positionX3, y);
+  });
 
-  color = 120 + colorOffset;
-  color = color + map(noise(color), 0, 1, -1, 1) * 5;
-  fill(120 + colorOffset, 100, 50);
-  drawDiamond(width/5, height/2);
+  movingDiamonds();
 
-  color = colorOffset;
-  color = color + map(noise(color), 0, 1, -1, 1) * 5;
-  fill(colorOffset, 100, 60);
-  drawDiamond(width/5, height - 150);
-
-  colorOffset += colorOffsetDirection;
-
-  if (colorOffset >= 120 ||colorOffset <= 0) {
-    colorOffsetDirection *= -1;
-  }
 
   drawBlackAndWhiteStripes();
 }
@@ -100,6 +120,36 @@ function drawBlackAndWhiteStripes() {
   strokeWeight(40);
   line(width / 1.33, 0, width / 1.33, height)
 }
+
+function movingDiamonds(){
+  let pointOnYtop = height/3;
+  let pointOnYbottom = height - 250;
+  line(pointOnX, 0, pointOnX, pointOnYtop)
+  line(pointOnX, pointOnYbottom, pointOnX, height)
+
+  let color = 240 + colorOffset;
+  color = color + map(noise(color), 0, 1, -1, 1) * 5;
+  fill(color, 204, 50);
+  drawDiamond(pointOnX, pointOnYtop);
+
+  color = colorOffset;
+  color = color + map(noise(color), 0, 1, -1, 1) * 5;
+  fill(colorOffset, 204, 50);
+  drawDiamond(pointOnX, pointOnYbottom);
+  pointOnX = pointOnX + 2;
+  if (pointOnX > width - 290) {
+    pointOnX = 0;
+  }
+
+
+  colorOffset += colorOffsetDirection;
+
+  if (colorOffset >= 120 ||colorOffset <= 0) {
+    colorOffsetDirection *= -1;
+  }
+}
+  
+
 
 function invertColors() {
   const aux = BG_COLOR;
