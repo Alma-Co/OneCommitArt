@@ -8,8 +8,14 @@ let colorOffsetDirection = 1;
 
 let BG_COLOR = 0;
 let STROKE_COLOR = 250;
+let SHOW_IMAGE = false;
 let pointOnX;
 let fontsize = 80;
+let bgImage;
+
+function preload() {
+  bgImage = loadImage('./assets/bg.png');
+}
 
 function setup() {
   createCanvas(1000, windowHeight);
@@ -44,7 +50,6 @@ function draw() {
   colorMode(HSL);
 
   textAlign(LEFT);
-  const posY = height -50;
   
   let positionX = 20;
   ['S', 'c', 'a', 'n'].forEach((letter, index) => {
@@ -70,8 +75,9 @@ function draw() {
 
   movingDiamonds();
 
-
   drawBlackAndWhiteStripes();
+
+  showImage();
 }
 
 function drawBranch(x, y, angle, length) {
@@ -148,13 +154,19 @@ function movingDiamonds(){
     colorOffsetDirection *= -1;
   }
 }
-  
 
+function showImage() {
+  if (SHOW_IMAGE) {
+    image(bgImage, width / 1.35, height / 3, 300, 300);
+  }
+}
 
 function invertColors() {
   const aux = BG_COLOR;
   BG_COLOR = STROKE_COLOR;
   STROKE_COLOR = aux;
+
+  SHOW_IMAGE = !SHOW_IMAGE;
 }
 
 function thunder() {
